@@ -159,3 +159,20 @@ select concat(Firstname,' ',LastName,' ',city,' ',state) from applicants;
 -- 18
 select distinct(jobtitle) from Jobs
 where JobTitle like '%Developer%' or JobTitle like '%Engineer%';
+
+
+-- 19
+select  apl.FirstName, apl.LastName, j.JobTitle,j.jobId, c.CompanyName from Applicants apl
+left outer join Applications aps ON apl.ApplicantID = aps.ApplicantID
+left outer join Jobs j  ON Aps.JobID = J.JobID
+left outer join Companies c ON j.CompanyID = c.CompanyID
+union
+select  apl.FirstName, apl.LastName, j.JobTitle,j.jobId, c.CompanyName  from Applicants apl
+right outer join Applications aps on apl.ApplicantID = aps.ApplicantID
+right outer join Jobs j  on Aps.JobID = J.JobID
+right outer join Companies c on j.CompanyID = c.CompanyID;
+
+-- 20
+select apl.* , c.*from applicants apl
+cross join companies c 
+where c.Location = 'Bangalore, Karnataka' and apl.Experience_yrs >2;
